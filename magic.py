@@ -1,3 +1,7 @@
+from flask import Flask
+
+app = Flask(__name__)
+
 def is_number(var):
 	try:
 		int(var)
@@ -5,5 +9,9 @@ def is_number(var):
 	except Exception:
 		return False
 
-x = 1
-print( is_number(x) )
+@app.route("/foo/<num>")
+def got_num(num: str):
+    if is_number(num):
+        return f"{num} is a number!"
+    else:
+        return f"{num} is not a number!"
